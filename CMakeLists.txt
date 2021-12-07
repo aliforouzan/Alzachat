@@ -20,7 +20,7 @@ set(REQUIRED_LIBS Core Network)
 set(REQUIRED_LIBS_QUALIFIED Qt6::Core Qt6::Network)
 
 add_executable(${PROJECT_NAME}
-        main.cpp
+        src/server/main.cpp
         src/server/main.cpp
         src/server/User.cpp
         src/server/User.h
@@ -40,7 +40,7 @@ add_executable(${PROJECT_NAME}
         src/lib/VideoMessage.h
         src/server/SysConfig.h
         src/server/AlzaServer.cpp
-        src/server/AlzaServer.h)
+        src/server/AlzaServer.h src/server/AlzaRunnable.cpp src/server/AlzaRunnable.h)
 
 if (NOT CMAKE_PREFIX_PATH)
     message(WARNING "CMAKE_PREFIX_PATH is not defined, you may need to set it "

@@ -1,5 +1,5 @@
 /*
- * Alzachat server main header file.
+ * Alzachat server header file.
  * Copyright (c) 2021 Alzachat. All rights reserved.
  *                  Ali Forouzan
  */
@@ -11,8 +11,21 @@
 #include <QThreadPool>
 #include <QDebug>
 
-class AlzaServer {
+class AlzaServer : public QTcpServer{
+	Q_OBJECT
+    public:
+	explicit AlzaServer(QObject *parent = 0);
+	void startServer();
 
+    protected:
+	void incomingConnection(qintptr handle);
+
+    signals:
+
+    public slots:
+
+    private:
+	QThreadPool *pool;
 };
 
 
