@@ -16,8 +16,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 set(QT_VERSION 6)
-set(REQUIRED_LIBS Core)
-set(REQUIRED_LIBS_QUALIFIED Qt6::Core)
+set(REQUIRED_LIBS Core Network)
+set(REQUIRED_LIBS_QUALIFIED Qt6::Core Qt6::Network)
 
 add_executable(${PROJECT_NAME}
         main.cpp
