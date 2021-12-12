@@ -1,6 +1,8 @@
-//
-// Created by forouzan_a on 11/29/21.
-//
+/*
+ * Alzachat lib Message file.
+ * Copyright (c) 2021 Alzachat. All rights reserved.
+ *                  Ali Forouzan
+ */
 
 #ifndef ALZACHAT_MESSAGE_H
 #define ALZACHAT_MESSAGE_H
@@ -9,8 +11,14 @@
 
 enum class MESSAGE_CMD
 {
-	M1,
-	M2
+	ALIVE,
+	REGISTER,
+	AUTH,
+	TWO_STEP_AUTH,
+	REGULAR,
+	USER_STATUS,
+	GET_UNREAD_MESSAGE,
+	SEARCH_USER
 };
 
 class Message {

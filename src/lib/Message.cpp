@@ -1,6 +1,8 @@
-//
-// Created by forouzan_a on 11/29/21.
-//
+/*
+ * Alzachat lib Message file.
+ * Copyright (c) 2021 Alzachat. All rights reserved.
+ *                  Ali Forouzan
+ */
 
 #include "Message.h"
 
