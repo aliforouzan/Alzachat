@@ -11,8 +11,7 @@
 #include <QRunnable>
 #include <QTcpSocket>
 
-class AlzaRunnable : public QRunnable
-{
+class AlzaRunnable : public QRunnable {
     public:
 	AlzaRunnable();
 

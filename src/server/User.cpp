@@ -5,7 +5,9 @@
 #include "User.h"
 
 #include <utility>
-#include "SysConfig.h"
+#include "ServerConfig.h"
+
+vector<User> sysUser;
 
 User::User(string &username, string &password) :
 	id(sysUser.size()), username(std::move(username)), password(std::move(password)),

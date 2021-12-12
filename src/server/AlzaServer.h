@@ -11,14 +11,14 @@
 #include <QThreadPool>
 #include <QDebug>
 
-class AlzaServer : public QTcpServer{
+class AlzaServer : public QTcpServer {
 	Q_OBJECT
     public:
-	explicit AlzaServer(QObject *parent = 0);
+	explicit AlzaServer(QObject *parent = nullptr);
 	void startServer();
 
     protected:
-	void incomingConnection(qintptr handle);
+	void incomingConnection(qintptr handle) override;
 
     signals:
 

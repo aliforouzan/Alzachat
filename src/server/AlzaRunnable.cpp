@@ -6,12 +6,10 @@
 
 #include "AlzaRunnable.h"
 
-AlzaRunnable::AlzaRunnable()
-{
+AlzaRunnable::AlzaRunnable() {
 }
 
-void AlzaRunnable::run()
-{
+void AlzaRunnable::run() {
 	if(!socketDescriptor) return;
 
 	QTcpSocket socket;
