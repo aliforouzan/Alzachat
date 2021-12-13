@@ -38,9 +38,19 @@ add_executable(${PROJECT_NAME}
         src/lib/ImageMessage.h
         src/lib/VideoMessage.cpp
         src/lib/VideoMessage.h
-        src/server/SysConfig.h
+        src/server/ServerConfig.h
         src/server/AlzaServer.cpp
-        src/server/AlzaServer.h src/server/AlzaRunnable.cpp src/server/AlzaRunnable.h)
+        src/server/AlzaServer.h
+        src/server/AlzaRunnable.cpp
+        src/lib/AlzaRunnable.h
+        src/server/ServerConfig.cpp
+        src/lib/Alzachat.h
+        src/lib/Logging.cpp
+        src/lib/Logging.h
+        src/client/main.cpp
+        src/client/AlzaClient.cpp
+        src/client/AlzaClient.h
+        src/client/AlzaRunnable.cpp)
 
 if (NOT CMAKE_PREFIX_PATH)
     message(WARNING "CMAKE_PREFIX_PATH is not defined, you may need to set it "
