@@ -5,14 +5,15 @@
  */
 
 #include <QCoreApplication>
-#include "../lib/Logging.h"
+#include "Logging.h"
+#include "AlzaClient.h"
 
 int main(int argc, char *argv[])
 {
 	QCoreApplication app(argc, argv);
 	qInstallMessageHandler(alzaMessageHandler);
 
-
+	AlzaClient client(&app, "localhost", 1234);
 
 	return app.exec();
 }

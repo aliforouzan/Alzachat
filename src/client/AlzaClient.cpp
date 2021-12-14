@@ -6,38 +6,37 @@
 
 #include "AlzaClient.h"
 
-AlzaClient::AlzaClient(QObject *parent) :
-	QObject(parent)
-{
+AlzaClient::AlzaClient(QObject *parent, const QString &host, qint16 port) : QObject(parent) {
 	QThreadPool::globalInstance()->setMaxThreadCount(5);
-}
+	socket = new QTcpSocket(parent);
 
-void AlzaClient::SetSocket(int Descriptor)
-{
-	// make a new socket
-	socket = new QTcpSocket(this);
-
-	qDebug() << "A new socket created!";
+	qDebug() << "A new socket created";
 
 	connect(socket, SIGNAL(connected()), this, SLOT(connected()));
 	connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
 	connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
+	connect(socket, SIGNAL(errorOccurred(QAbstractSocket::SocketError)),
+		this, SLOT(errorOccurred(QAbstractSocket::SocketError)));
+	connect(socket, SIGNAL(stateChanged(QAbstractSocket::SocketState)),
+		this, SLOT(stateChanged(QAbstractSocket::SocketState)));
 
-	socket->setSocketDescriptor(Descriptor);
 
-	qDebug() << " Client connected at " << Descriptor;
+	qDebug() << "Trying to connect to the server";
+	socket->connectToHost( host, port );
+
+	QAbstractSocket::SocketState s = socket->state();
+	if (s == QAbstractSocket::BoundState)
+		qDebug() << "Client connected at " + host + ":" + QString::number(port);
 }
 
 
 // asynchronous - runs separately from the thread we created
-void AlzaClient::connected()
-{
+void AlzaClient::connected() {
 	qDebug() << "Client connected event";
 }
 
 // asynchronous
-void AlzaClient::disconnected()
-{
+void AlzaClient::disconnected() {
 	qDebug() << "Client disconnected";
 }
 
@@ -46,8 +45,7 @@ void AlzaClient::disconnected()
 // Our code running in our thread not in Qthread
 // That's why we're getting the thread from the pool
 
-void AlzaClient::readyRead()
-{
+void AlzaClient::readyRead() {
 	qDebug() << "MyClient::readyRead()";
 	qDebug() << socket->readAll();
 
@@ -63,10 +61,44 @@ void AlzaClient::readyRead()
 
 // After a task performed a time consuming task.
 // We grab the result here, and send it to client
-void AlzaClient::TaskResult(int Number)
-{
+void AlzaClient::TaskResult(int Number) {
 	QByteArray Buffer;
 	Buffer.append("\r\nTask result = %d", Number);
 
 	socket->write(Buffer);
+}
+
+void AlzaClient::errorOccurred(QAbstractSocket::SocketError error) {
+	qCritical() << "error in connection: " + socket->errorString();
+}
+
+void AlzaClient::stateChanged(QAbstractSocket::SocketState socketState) {
+
+	QString state;
+
+	switch (socketState) {
+		case QAbstractSocket::BoundState:
+			state = "BoundState";
+			break;
+		case QAbstractSocket::ConnectedState:
+			state = "ConnectedState";
+			break;
+		case QAbstractSocket::ClosingState:
+			state = "ClosingState";
+			break;
+		case QAbstractSocket::ConnectingState:
+			state = "ConnectingState";
+			break;
+		case QAbstractSocket::HostLookupState:
+			state = "HostLookupState";
+			break;
+		case QAbstractSocket::UnconnectedState:
+			state = "UnconnectedState";
+			break;
+		case QAbstractSocket::ListeningState:
+			state = "ListeningState";
+			break;
+	}
+
+	qDebug() << "connection state change to " + state;
 }

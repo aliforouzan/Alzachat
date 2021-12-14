@@ -17,8 +17,7 @@
 class AlzaClient : public QObject {
 	Q_OBJECT
     public:
-	explicit AlzaClient(QObject *parent = 0);
-	void SetSocket(int Descriptor);
+	explicit AlzaClient(QObject *parent, const QString &host, qint16 port);
 
     signals:
 
@@ -26,6 +25,8 @@ class AlzaClient : public QObject {
 	void connected();
 	void disconnected();
 	void readyRead();
+	void errorOccurred(QAbstractSocket::SocketError error);
+	void stateChanged(QAbstractSocket::SocketState socketState);
 
 	// make the server fully ascynchronous
 	// by doing time consuming task

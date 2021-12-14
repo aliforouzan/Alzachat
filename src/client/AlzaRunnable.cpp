@@ -4,7 +4,7 @@
  *                  Ali Forouzan
  */
 
-#include "../lib/AlzaRunnable.h"
+#include "AlzaRunnable.h"
 
 AlzaRunnable::AlzaRunnable() {
 	qDebug() << "MyTask()";
