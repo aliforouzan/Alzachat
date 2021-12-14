@@ -25,8 +25,8 @@ set(PROJECT_NAME_LIB ${PROJECT_NAME}Lib)
 add_executable(${PROJECT_NAME_SERVER}
         src/server/main.cpp
         src/server/main.cpp
-        src/server/User.cpp
-        src/server/User.h
+        src/lib/User.cpp
+        src/lib/User.h
         src/server/SMS.cpp
         src/server/SMS.h
         src/server/ServerConfig.h

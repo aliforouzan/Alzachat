@@ -5,7 +5,7 @@
 #include "User.h"
 
 #include <utility>
-#include "ServerConfig.h"
+#include "../server/ServerConfig.h"
 
 vector<User> sysUser;
 

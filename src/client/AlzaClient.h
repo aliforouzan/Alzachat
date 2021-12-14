@@ -9,10 +9,12 @@
 
 #include <QObject>
 #include <QTcpSocket>
-#include <QDebug>
 #include <QThreadPool>
-#include "../lib/AlzaRunnable.h"
-#include "../lib/Alzachat.h"
+#include <QTimer>
+#include <QDebug>
+
+#include "Alzachat.h"
+#include "AlzaRunnable.h"
 
 class AlzaClient : public QObject {
 	Q_OBJECT
@@ -26,6 +28,7 @@ class AlzaClient : public QObject {
 	void disconnected();
 	void readyRead();
 	void errorOccurred(QAbstractSocket::SocketError error);
+	void connect();
 	void stateChanged(QAbstractSocket::SocketState socketState);
 
 	// make the server fully ascynchronous
@@ -33,7 +36,10 @@ class AlzaClient : public QObject {
 	void TaskResult(int Number);
 
     private:
+	QString host;
+	qint16 port;
 	QTcpSocket *socket;
+	QTimer connectionTimer;
 };
 
 
