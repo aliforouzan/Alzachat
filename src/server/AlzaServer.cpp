@@ -4,7 +4,7 @@
  *                  Ali Forouzan
  */
 
-#include "../lib/AlzaRunnable.h"
+#include "AlzaRunnable.h"
 #include "ServerConfig.h"
 #include "AlzaServer.h"
 

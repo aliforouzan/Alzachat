@@ -6,7 +6,7 @@
 
 #include <QCoreApplication>
 #include <QHostAddress>
-#include "../lib/Alzachat.h"
+#include "Alzachat.h"
 #include "ServerConfig.h"
 
 struct serverConfig config;
@@ -25,7 +25,7 @@ void readConfig(const QString& path)
 	delete configRead;
 }
 
-bool validateConfig()
+void validateConfig()
 {
 	QHostAddress addr;
 	short port;

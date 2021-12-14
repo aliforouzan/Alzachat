@@ -7,7 +7,7 @@
 #include <QCoreApplication>
 #include "AlzaServer.h"
 #include "ServerConfig.h"
-#include "../lib/Logging.h"
+#include "Logging.h"
 
 int main(int argc, char *argv[])
 {

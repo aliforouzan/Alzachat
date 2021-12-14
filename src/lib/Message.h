@@ -7,7 +7,7 @@
 #ifndef ALZACHAT_MESSAGE_H
 #define ALZACHAT_MESSAGE_H
 
-#include "../src/server/User.h"
+#include "../server/User.h"
 
 enum class MESSAGE_CMD
 {

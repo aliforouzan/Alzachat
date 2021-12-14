@@ -9,7 +9,6 @@
 #include <string>
 #include <vector>
 #include <QSettings>
-
 #include "User.h"
 
 #define DEFAULT_CONF_FILE	"/etc/Alzachat/Alzachat.conf"

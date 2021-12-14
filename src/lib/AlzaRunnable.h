@@ -23,6 +23,9 @@ class AlzaRunnable : public QObject, public QRunnable {
 	Q_OBJECT
     public:
 	AlzaRunnable();
+	qintptr socketDescriptor;
+	int (*func)(void *);
+	void *funcData;
 
     signals:
 	// notify to the main thread when we're done
@@ -30,9 +33,6 @@ class AlzaRunnable : public QObject, public QRunnable {
 
     protected:
 	virtual void run();
-
-    public:
-	qintptr socketDescriptor;
 
 };
 

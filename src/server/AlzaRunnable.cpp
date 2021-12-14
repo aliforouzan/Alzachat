@@ -4,7 +4,7 @@
  *                  Ali Forouzan
  */
 
-#include "../lib/AlzaRunnable.h"
+#include "AlzaRunnable.h"
 
 AlzaRunnable::AlzaRunnable() {
 	qDebug() << "MyTask()";
@@ -23,6 +23,7 @@ void AlzaRunnable::run() {
 	QTcpSocket socket;
 	socket.setSocketDescriptor(socketDescriptor);
 
+	func(funcData);
 	socket.write("From server: hello world");
 	socket.flush();
 	socket.waitForBytesWritten();
