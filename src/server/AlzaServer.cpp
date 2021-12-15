@@ -4,9 +4,11 @@
  *                  Ali Forouzan
  */
 
-#include "AlzaRunnable.h"
+#include "serverRunnable.h"
 #include "ServerConfig.h"
 #include "AlzaServer.h"
+
+vector<User> sysUser;
 
 AlzaServer::AlzaServer(QObject *parent) : QTcpServer(parent) {
 	pool = new QThreadPool(this);
@@ -27,7 +29,7 @@ void AlzaServer::incomingConnection(qintptr handle) {
 	// 4. The server throws the runnable to the thread.
 
 	// Note: Rannable is a task not a thread
-	auto *task = new AlzaRunnable();
+	auto *task = new serverRunnable();
 	task->setAutoDelete(true);
 
 	task->socketDescriptor = handle;

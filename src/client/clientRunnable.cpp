@@ -4,9 +4,9 @@
  *                  Ali Forouzan
  */
 
-#include "AlzaRunnable.h"
+#include "serverRunnable.h"
 
-AlzaRunnable::AlzaRunnable() {
+serverRunnable::serverRunnable() {
 	qDebug() << "MyTask()";
 }
 
@@ -17,15 +17,15 @@ AlzaRunnable::AlzaRunnable() {
 // but Qt does.
 // This may just stay in the queue for several ms depending on how busy the server is.
 
-void AlzaRunnable::run() {
-	if(!socketDescriptor) return;
+void serverRunnable::run() {
+	qDebug() << "Task start";
 
-	QTcpSocket socket;
-	socket.setSocketDescriptor(socketDescriptor);
+	int iNumber = 0;
+	for(int i = 0; i < 100; i++)
+	{
+		iNumber += 1;
+	}
 
-	func(funcData);
-	socket.write("From server: hello world");
-	socket.flush();
-	socket.waitForBytesWritten();
-	socket.close();
+	qDebug() << "Task done";
+	emit Result(iNumber);
 }
