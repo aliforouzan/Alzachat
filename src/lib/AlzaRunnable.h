@@ -4,8 +4,8 @@
  *                  Ali Forouzan
  */
 
-#ifndef ALZACHAT_SERVERRUNNABLE_H
-#define ALZACHAT_SERVERRUNNABLE_H
+#ifndef ALZACHAT_ALZARUNNABLE_H
+#define ALZACHAT_ALZARUNNABLE_H
 
 
 #include <QRunnable>
@@ -19,10 +19,10 @@
 // But we need them.
 // Thus, we should use multiple inheritance: QObject inserted here
 
-class ServerRunnable : public QObject, public QRunnable {
+class AlzaRunnable : public QObject, public QRunnable {
 	Q_OBJECT
     public:
-	ServerRunnable();
+	AlzaRunnable();
 	qintptr socketDescriptor;
 	int (*func)(void *);
 	void *funcData;
@@ -37,4 +37,4 @@ class ServerRunnable : public QObject, public QRunnable {
 };
 
 
-#endif //ALZACHAT_SERVERRUNNABLE_H
+#endif //ALZACHAT_ALZARUNNABLE_H

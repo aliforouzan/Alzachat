@@ -57,7 +57,7 @@ add_library(${PROJECT_NAME_LIB} STATIC
         src/lib/Alzachat.h
         src/lib/Logging.cpp
         src/lib/Logging.h
-        src/lib/ServerRunnable.h)
+        src/lib/AlzaRunnable.h)
 
 if (NOT CMAKE_PREFIX_PATH)
     message(WARNING "CMAKE_PREFIX_PATH is not defined, you may need to set it "

@@ -4,9 +4,9 @@
  *                  Ali Forouzan
  */
 
-#include "ServerRunnable.h"
+#include "AlzaRunnable.h"
 
-ServerRunnable::ServerRunnable() {
+AlzaRunnable::AlzaRunnable() {
 	qDebug() << "MyTask()";
 }
 
@@ -17,7 +17,7 @@ ServerRunnable::ServerRunnable() {
 // but Qt does.
 // This may just stay in the queue for several ms depending on how busy the server is.
 
-void ServerRunnable::run() {
+void AlzaRunnable::run() {
 	qDebug() << "Task start";
 
 	int iNumber = 0;
