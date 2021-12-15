@@ -1,5 +1,5 @@
 /*
- * Alzachat client header file.
+ * Alzachat client AlizaClient class definition.
  * Copyright (c) 2021 Alzachat. All rights reserved.
  *                  Ali Forouzan
  */

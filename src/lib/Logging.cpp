@@ -1,5 +1,5 @@
 /*
- * Alzachat logging implementation file.
+ * Alzachat lib logging class implementation.
  * Copyright (c) 2021 Alzachat. All rights reserved.
  *                  Ali Forouzan
  */

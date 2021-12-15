@@ -1,5 +1,5 @@
 /*
- * Alzachat client file.
+ * Alzachat client AlizaClient class implementation.
  * Copyright (c) 2021 Alzachat. All rights reserved.
  *                  Ali Forouzan
  */

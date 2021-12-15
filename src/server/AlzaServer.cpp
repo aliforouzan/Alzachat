@@ -1,5 +1,5 @@
 /*
- * Alzachat server file.
+ * Alzachat server AlzaServer class implementation.
  * Copyright (c) 2021 Alzachat. All rights reserved.
  *                  Ali Forouzan
  */

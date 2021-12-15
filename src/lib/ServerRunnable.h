@@ -1,5 +1,5 @@
 /*
- * Alzachat Runnable header file.
+ * Alzachat lib runnable class definition.
  * Copyright (c) 2021 Alzachat. All rights reserved.
  *                  Ali Forouzan
  */

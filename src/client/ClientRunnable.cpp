@@ -1,5 +1,5 @@
 /*
- * Alzachat Runnable file.
+ * Alzachat client ClientRunnable class implementation.
  * Copyright (c) 2021 Alzachat. All rights reserved.
  *                  Ali Forouzan
  */

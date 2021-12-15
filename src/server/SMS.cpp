@@ -1,6 +1,8 @@
-//
-// Created by forouzan_a on 11/29/21.
-//
+/*
+ * Alzachat server SMS class implementation.
+ * Copyright (c) 2021 Alzachat. All rights reserved.
+ *                  Ali Forouzan
+ */
 
 #include "SMS.h"
 

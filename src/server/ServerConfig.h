@@ -1,8 +1,9 @@
 /*
- * Alzachat server config reader header file.
+ * Alzachat server ServerConfig class definition.
  * Copyright (c) 2021 Alzachat. All rights reserved.
  *                  Ali Forouzan
  */
+
 #ifndef ALZACHAT_SERVERCONFIG_H
 #define ALZACHAT_SERVERCONFIG_H
 

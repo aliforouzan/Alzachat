@@ -1,6 +1,8 @@
-//
-// Created by forouzan_a on 11/29/21.
-//
+/*
+ * Alzachat lib TextMessage class definition.
+ * Copyright (c) 2021 Alzachat. All rights reserved.
+ *                  Ali Forouzan
+ */
 
 #ifndef ALZACHAT_TEXTMESSAGE_H
 #define ALZACHAT_TEXTMESSAGE_H

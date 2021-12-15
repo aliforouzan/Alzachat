@@ -1,5 +1,5 @@
 /*
- * Alzachat server config reader file.
+ * Alzachat server ServerConfig class implementation.
  * Copyright (c) 2021 Alzachat. All rights reserved.
  *                  Ali Forouzan
  */

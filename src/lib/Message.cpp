@@ -1,5 +1,5 @@
 /*
- * Alzachat lib Message file.
+ * Alzachat lib Message class implementation.
  * Copyright (c) 2021 Alzachat. All rights reserved.
  *                  Ali Forouzan
  */

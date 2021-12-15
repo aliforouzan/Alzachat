@@ -1,5 +1,5 @@
 /*
- * Alzachat server header file.
+ * Alzachat server AlzaServer class definition.
  * Copyright (c) 2021 Alzachat. All rights reserved.
  *                  Ali Forouzan
  */

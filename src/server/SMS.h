@@ -1,6 +1,8 @@
-//
-// Created by forouzan_a on 11/29/21.
-//
+/*
+ * Alzachat server SMS class definition.
+ * Copyright (c) 2021 Alzachat. All rights reserved.
+ *                  Ali Forouzan
+ */
 
 #ifndef ALZACHAT_SMS_H
 #define ALZACHAT_SMS_H
