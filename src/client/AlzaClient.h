@@ -14,7 +14,7 @@
 #include <QDebug>
 
 #include "Alzachat.h"
-#include "serverRunnable.h"
+#include "ServerRunnable.h"
 
 class AlzaClient : public QObject {
 	Q_OBJECT

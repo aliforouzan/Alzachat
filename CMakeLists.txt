@@ -32,14 +32,14 @@ add_executable(${PROJECT_NAME_SERVER}
         src/server/ServerConfig.h
         src/server/AlzaServer.cpp
         src/server/AlzaServer.h
-        src/server/serverRunnable.cpp
+        src/server/ServerRunnable.cpp
         src/server/ServerConfig.cpp)
 
 add_executable(${PROJECT_NAME_CLIENT}
         src/client/main.cpp
         src/client/AlzaClient.cpp
         src/client/AlzaClient.h
-        src/client/clientRunnable.cpp)
+        src/client/ClientRunnable.cpp)
 
 add_library(${PROJECT_NAME_LIB} STATIC
         src/lib/Message.cpp
@@ -57,7 +57,7 @@ add_library(${PROJECT_NAME_LIB} STATIC
         src/lib/Alzachat.h
         src/lib/Logging.cpp
         src/lib/Logging.h
-        src/lib/serverRunnable.h)
+        src/lib/ServerRunnable.h)
 
 if (NOT CMAKE_PREFIX_PATH)
     message(WARNING "CMAKE_PREFIX_PATH is not defined, you may need to set it "

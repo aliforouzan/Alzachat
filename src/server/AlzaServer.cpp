@@ -4,7 +4,7 @@
  *                  Ali Forouzan
  */
 
-#include "serverRunnable.h"
+#include "ServerRunnable.h"
 #include "ServerConfig.h"
 #include "AlzaServer.h"
 
@@ -29,7 +29,7 @@ void AlzaServer::incomingConnection(qintptr handle) {
 	// 4. The server throws the runnable to the thread.
 
 	// Note: Rannable is a task not a thread
-	auto *task = new serverRunnable();
+	auto *task = new ServerRunnable();
 	task->setAutoDelete(true);
 
 	task->socketDescriptor = handle;

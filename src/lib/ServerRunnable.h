@@ -19,10 +19,10 @@
 // But we need them.
 // Thus, we should use multiple inheritance: QObject inserted here
 
-class serverRunnable : public QObject, public QRunnable {
+class ServerRunnable : public QObject, public QRunnable {
 	Q_OBJECT
     public:
-	serverRunnable();
+	ServerRunnable();
 	qintptr socketDescriptor;
 	int (*func)(void *);
 	void *funcData;
