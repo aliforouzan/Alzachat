@@ -11,7 +11,9 @@
 
 enum class MESSAGE_CMD
 {
-	ALIVE,
+	OK,			/* Ok message:    client<->server : positive response for a request */
+	NOK,			/* Nok message:   client<->server : negative response for a request */
+	ALIVE,			/* Alive message: client ->server : retrieve new message and hold connection open */
 	REGISTER,
 	AUTH,
 	TWO_STEP_AUTH,

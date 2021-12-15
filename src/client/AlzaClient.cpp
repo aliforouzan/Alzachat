@@ -108,7 +108,7 @@ void AlzaClient::readyRead() {
 	qDebug() << socket->readAll();
 
 	// Time consumer
-	AlzaRunnable *mytask = new AlzaRunnable();
+	serverRunnable *mytask = new serverRunnable();
 	mytask->setAutoDelete(true);
 	QAbstractSocket::connect(mytask, SIGNAL(Result(int)), this, SLOT(TaskResult(int)), Qt::QueuedConnection);
 

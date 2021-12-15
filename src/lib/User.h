@@ -22,8 +22,8 @@ private:
 	id_t phoneNumber{};
 	vector<User *> friends;
 public:
-	User(string &username, string &password);
-	User(string &username, string &password, string &firstAndFamilyName);
+	User(id_t id, string &username, string &password);
+	User(id_t id, string &username, string &password, string &firstAndFamilyName);
 
 	id_t getId() const;
 	void setId(id_t id);
@@ -42,6 +42,8 @@ public:
 
 	const vector<User *> &getFriends();
 	void addFriends(User *user);
+
+	void userRegister();
 };
 
 

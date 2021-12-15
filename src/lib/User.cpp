@@ -3,18 +3,17 @@
 //
 
 #include "User.h"
+#include "Message.h"
 
 #include <utility>
-#include "../server/ServerConfig.h"
 
-vector<User> sysUser;
 
-User::User(string &username, string &password) :
-	id(sysUser.size()), username(std::move(username)), password(std::move(password)),
+User::User(id_t id, string &username, string &password) :
+	id(id), username(std::move(username)), password(std::move(password)),
 	firstAndFamilyName() {}
 
-User::User(string &username, string &password, string &firstAndFamilyName) :
-	id(sysUser.size()), username(username), password(password),
+User::User(id_t id, string &username, string &password, string &firstAndFamilyName) :
+	id(id), username(username), password(password),
 	firstAndFamilyName(firstAndFamilyName) {}
 
 id_t User::getId() const {
