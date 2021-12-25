@@ -6,8 +6,8 @@
 #ifndef ALZACHAT_USER_H
 #define ALZACHAT_USER_H
 
-#include <string>
 #include <vector>
+#include "Alzachat.h"
 
 using namespace std;
 
@@ -17,34 +17,32 @@ using namespace std;
 class User {
 private:
 	id_t id;
-	string username;
-	string password;
-	string firstAndFamilyName;
-	id_t phoneNumber{};
+	QString username;
+	QString password;
+	QString firstAndFamilyName;
+	qint64 phoneNumber;
 	vector<User *> friends;
 public:
-	User(id_t id, string &username, string &password);
-	User(id_t id, string &username, string &password, string &firstAndFamilyName);
+	User(id_t id, QString &username, QString &password);
+	User(id_t id, QString &username, QString &password, QString &firstAndFamilyName);
 
 	id_t getId() const;
 	void setId(id_t id);
 
-	const string &getUsername() const;
-	void setUsername(const string &username);
+	const QString &getUsername() const;
+	void setUsername(const QString &username);
 
-	const string &getPassword() const;
-	void setPassword(const string &password);
+	const QString &getPassword() const;
+	void setPassword(const QString &password);
 
-	const string &getFirstAndFamilyName() const;
-	void setFirstAndFamilyName(const string &firstAndFamilyName);
+	const QString &getFirstAndFamilyName() const;
+	void setFirstAndFamilyName(const QString &firstAndFamilyName);
 
-	uint64_t getPhoneNumber() const;
+	qint64 getPhoneNumber() const;
 	void setPhoneNumber(uint64_t phoneNumber);
 
 	const vector<User *> &getFriends();
 	void addFriends(User *user);
-
-	void userRegister();
 };
 
 

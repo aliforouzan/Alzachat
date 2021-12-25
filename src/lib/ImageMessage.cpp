@@ -5,7 +5,3 @@
  */
 
 #include "ImageMessage.h"
-
-int MediaMessage::send() {
-	return 0;
-}

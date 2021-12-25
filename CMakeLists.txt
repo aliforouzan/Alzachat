@@ -25,24 +25,25 @@ set(PROJECT_NAME_LIB ${PROJECT_NAME}Lib)
 add_executable(${PROJECT_NAME_SERVER}
         src/server/main.cpp
         src/server/main.cpp
-        src/lib/User.cpp
-        src/lib/User.h
         src/server/SMS.cpp
         src/server/SMS.h
         src/server/ServerConfig.h
         src/server/AlzaServer.cpp
         src/server/AlzaServer.h
-        src/server/ServerRunnable.cpp
-        src/server/ServerConfig.cpp)
+        src/server/ServerConfig.cpp
+        src/server/ServerMessage.cpp
+        src/server/ServerMessage.h)
 
 add_executable(${PROJECT_NAME_CLIENT}
         src/client/main.cpp
         src/client/AlzaClient.cpp
         src/client/AlzaClient.h
-        src/client/ClientRunnable.cpp)
+        src/client/ClientUser.cpp
+        src/client/ClientUser.h
+        src/client/ClientMessage.cpp
+        src/client/ClientMessage.h)
 
 add_library(${PROJECT_NAME_LIB} STATIC
-        src/lib/Message.cpp
         src/lib/Message.h
         src/lib/TextMessage.cpp
         src/lib/TextMessage.h
@@ -57,7 +58,10 @@ add_library(${PROJECT_NAME_LIB} STATIC
         src/lib/Alzachat.h
         src/lib/Logging.cpp
         src/lib/Logging.h
-        src/lib/AlzaRunnable.h)
+        src/lib/AlzaRunnable.h
+        src/lib/User.cpp
+        src/lib/User.h
+        src/lib/InternalMessage.h)
 
 if (NOT CMAKE_PREFIX_PATH)
     message(WARNING "CMAKE_PREFIX_PATH is not defined, you may need to set it "

@@ -22,8 +22,12 @@
 class AlzaRunnable : public QObject, public QRunnable {
 	Q_OBJECT
     public:
-	AlzaRunnable();
-	qintptr socketDescriptor;
+	AlzaRunnable(int (*func)(void *), void *funcData, bool autoDelete = true, QObject *parent = nullptr) :
+	func(func), funcData(funcData), QObject(parent) {
+		setAutoDelete(autoDelete);
+	};
+
+    private:
 	int (*func)(void *);
 	void *funcData;
 
@@ -32,7 +36,11 @@ class AlzaRunnable : public QObject, public QRunnable {
 	void Result(int Number);
 
     protected:
-	virtual void run();
+	void run() override {
+		qDebug() << "runnable started func:" << &func << "data_ptr:" << funcData;
+		func(funcData);
+		qDebug() << "runnable finished func:" << &func << "data_ptr:" << funcData;
+	};
 
 };
 

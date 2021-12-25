@@ -10,7 +10,7 @@
 #include "MediaMessage.h"
 
 class ImageMessage:MediaMessage {
-	int send() override;
+
 };
 
 

@@ -9,9 +9,5 @@
 
 #include "MediaMessage.h"
 
-class VideoMessage:MediaMessage {
-	int send() override;
-};
-
 
 #endif //ALZACHAT_VIDEOMESSAGE_H

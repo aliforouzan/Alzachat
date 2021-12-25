@@ -5,7 +5,3 @@
  */
 
 #include "VoiceMessage.h"
-
-int VoiceMessage::send(){
-	return 0;
-}

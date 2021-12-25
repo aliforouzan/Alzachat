@@ -16,16 +16,23 @@ class AlzaServer : public QTcpServer {
     public:
 	explicit AlzaServer(QObject *parent = nullptr);
 	void startServer();
+	static void send(QTcpSocket *socket, QString *data);
 
     protected:
-	void incomingConnection(qintptr handle) override;
 
     signals:
+	void dataReceived(QByteArray);
 
-    public slots:
+    private slots:
+	void newConnection();
+	void disconnected();
+	void readyRead();
 
     private:
 	QThreadPool *pool;
+	QHash<QTcpSocket*, QByteArray*> buffers; //We need a buffer to store data until block has completely received
+	QHash<QTcpSocket*, qint32*> sizes;	//We need to store the size to verify if a block has received completely
+
 };
 
 

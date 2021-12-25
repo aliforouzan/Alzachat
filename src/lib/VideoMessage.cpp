@@ -5,7 +5,3 @@
  */
 
 #include "VideoMessage.h"
-
-int VideoMessage::send() {
-	return 0;
-}

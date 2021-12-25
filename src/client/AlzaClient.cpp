@@ -47,15 +47,6 @@ void AlzaClient::disconnected() {
 	qDebug() << "Client disconnected";
 }
 
-// After a task performed a time consuming task.
-// We grab the result here, and send it to client
-void AlzaClient::TaskResult(int Number) {
-	QByteArray Buffer;
-	Buffer.append("\r\nTask result = %d", Number);
-
-	socket->write(Buffer);
-}
-
 void AlzaClient::errorOccurred(QAbstractSocket::SocketError error) {
 	qCritical() << "error in connection: " + socket->errorString();
 
@@ -108,11 +99,20 @@ void AlzaClient::readyRead() {
 	qDebug() << socket->readAll();
 
 	// Time consumer
-	AlzaRunnable *mytask = new AlzaRunnable();
+	AlzaRunnable *mytask = new AlzaRunnable(nullptr, nullptr);
 	mytask->setAutoDelete(true);
 	QAbstractSocket::connect(mytask, SIGNAL(Result(int)), this, SLOT(TaskResult(int)), Qt::QueuedConnection);
 
 	qDebug() << "Starting a new task using a thread from the QThreadPool";
 	QThreadPool::globalInstance()->start(mytask);
 
+}
+
+// After a task performed a time consuming task.
+// We grab the result here, and send it to client
+void AlzaClient::TaskResult(int Number) {
+	QByteArray Buffer;
+	Buffer.append("\r\nTask result = %d", Number);
+
+	socket->write(Buffer);
 }

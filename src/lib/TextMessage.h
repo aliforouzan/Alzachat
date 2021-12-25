@@ -10,8 +10,7 @@
 #include "Message.h"
 
 class TextMessage:Message {
-	int send() override;
-	int receive() override;
+
 };
 
 

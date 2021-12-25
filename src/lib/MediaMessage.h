@@ -13,7 +13,7 @@ class MediaMessage:Message {
 private:
 	streambuf stream;
 public:
-	int send() override;
+
 };
 
 

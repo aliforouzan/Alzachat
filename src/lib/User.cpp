@@ -10,11 +10,11 @@
 #include <utility>
 
 
-User::User(id_t id, string &username, string &password) :
+User::User(id_t id, QString &username, QString &password) :
 	id(id), username(std::move(username)), password(std::move(password)),
 	firstAndFamilyName() {}
 
-User::User(id_t id, string &username, string &password, string &firstAndFamilyName) :
+User::User(id_t id, QString &username, QString &password, QString &firstAndFamilyName) :
 	id(id), username(username), password(password),
 	firstAndFamilyName(firstAndFamilyName) {}
 
@@ -26,31 +26,31 @@ void User::setId(id_t id) {
 	User::id = id;
 }
 
-const string &User::getUsername() const {
+const QString &User::getUsername() const {
 	return username;
 }
 
-void User::setUsername(const string &username) {
+void User::setUsername(const QString &username) {
 	User::username = username;
 }
 
-const string &User::getPassword() const {
+const QString &User::getPassword() const {
 	return password;
 }
 
-void User::setPassword(const string &password) {
+void User::setPassword(const QString &password) {
 	User::password = password;
 }
 
-const string &User::getFirstAndFamilyName() const {
+const QString &User::getFirstAndFamilyName() const {
 	return firstAndFamilyName;
 }
 
-void User::setFirstAndFamilyName(const string &firstAndFamilyName) {
+void User::setFirstAndFamilyName(const QString &firstAndFamilyName) {
 	User::firstAndFamilyName = firstAndFamilyName;
 }
 
-uint64_t User::getPhoneNumber() const {
+qint64 User::getPhoneNumber() const {
 	return phoneNumber;
 }
 
