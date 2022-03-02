@@ -4,17 +4,18 @@
  *                  Ali Forouzan
  */
 
+#include <QRandomGenerator>
 #include "AlzaRunnable.h"
 #include "ServerConfig.h"
 #include "ServerMessage.h"
 #include "AlzaServer.h"
 
 vector<User> sysUser;
+extern AlzaServer *server;
 
 AlzaServer::AlzaServer(QObject *parent) : QTcpServer(parent) {
 	pool = new QThreadPool(this);
 	pool->setMaxThreadCount(5);
-	connect(this, SIGNAL(newConnection()), SLOT(newConnection()));
 }
 
 void AlzaServer::startServer() {
@@ -24,26 +25,27 @@ void AlzaServer::startServer() {
 		qFatal("starting server failed!");
 }
 
-void AlzaServer::newConnection()
+void AlzaServer::incomingConnection(qintptr handle)
 {
-	while (this->hasPendingConnections()) {
-		QTcpSocket *socket = this->nextPendingConnection();
-		connect(socket, SIGNAL(readyRead()), SLOT(readyRead()));
-		connect(socket, SIGNAL(disconnected()), SLOT(disconnected()));
-		auto *buffer = new QByteArray();
-		auto *s = new qint32(0);
-		buffers.insert(socket, buffer);
-		sizes.insert(socket, s);
+	id_t userId;
+	User *user;
 
-		if (socket->state() == QAbstractSocket::ConnectedState) {
-			auto *task = new AlzaRunnable(ServerMessage::sendHello, socket, true, this);
-			pool->start(task);
-			//delete(task);
-		}
-	}
+	do {
+		userId = QRandomGenerator::global()->generate();
+	} while (connections.contains(userId));
+
+	user = new User(userId);
+	connections.insert(userId, handle);
+	users.insert(userId, user);
+	auto *task = new AlzaRunnable(ServerMessage::sendHello, reinterpret_cast<void *>(user), this);
+	pool->start(task);
 }
 
-void AlzaServer::disconnected()
+void AlzaServer::result(int returnValue) {
+	qDebug() << "Task result = " << returnValue;
+}
+
+/*void AlzaServer::disconnected()
 {
 	QTcpSocket *socket = static_cast<QTcpSocket*>(sender());
 	QByteArray *buffer = buffers.value(socket);
@@ -51,8 +53,7 @@ void AlzaServer::disconnected()
 	socket->deleteLater();
 	delete buffer;
 	delete s;
-}
-
+}*/
 
 qint32 ArrayToInt(QByteArray source)
 {
@@ -62,7 +63,7 @@ qint32 ArrayToInt(QByteArray source)
 	return temp;
 }
 
-void AlzaServer::readyRead()
+/*void AlzaServer::readyRead()
 {
 	QTcpSocket *socket = static_cast<QTcpSocket*>(sender());
 	QByteArray *buffer = buffers.value(socket);
@@ -89,10 +90,22 @@ void AlzaServer::readyRead()
 			}
 		}
 	}
-}
+}*/
 
-void AlzaServer::send(QTcpSocket *socket, QString *data) {
+void AlzaServer::send(qintptr socketDescriptor, QString *data) {
+	QTcpSocket *socket= new QTcpSocket;
+
+	socket->setSocketDescriptor(socketDescriptor);
+	server->addPendingConnection(socket);
 	socket->write(data->toUtf8());
 	socket->flush();
 	socket->waitForBytesWritten();
+}
+
+const QHash<id_t, qintptr> &AlzaServer::getConnections() const {
+	return connections;
+}
+
+const QHash<id_t, User *> &AlzaServer::getUsers() const {
+	return users;
 }

@@ -22,9 +22,11 @@
 class AlzaRunnable : public QObject, public QRunnable {
 	Q_OBJECT
     public:
-	AlzaRunnable(int (*func)(void *), void *funcData, bool autoDelete = true, QObject *parent = nullptr) :
-	func(func), funcData(funcData), QObject(parent) {
+	AlzaRunnable(int (*func)(void *), void *funcData,
+		     QObject *parent = nullptr, bool autoDelete = true) :
+		     func(func), funcData(funcData), QObject(parent) {
 		setAutoDelete(autoDelete);
+		QAbstractSocket::connect(this, SIGNAL(result(int)), parent, SLOT(result(int)));
 	};
 
     private:
@@ -33,12 +35,12 @@ class AlzaRunnable : public QObject, public QRunnable {
 
     signals:
 	// notify to the main thread when we're done
-	void Result(int Number);
+	void result(int Number);
 
     protected:
 	void run() override {
 		qDebug() << "runnable started func:" << &func << "data_ptr:" << funcData;
-		func(funcData);
+		emit result(func(funcData));
 		qDebug() << "runnable finished func:" << &func << "data_ptr:" << funcData;
 	};
 

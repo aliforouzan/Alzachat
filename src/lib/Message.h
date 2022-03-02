@@ -7,6 +7,7 @@
 #ifndef ALZACHAT_MESSAGE_H
 #define ALZACHAT_MESSAGE_H
 
+#include <QRegularExpression>
 #include "User.h"
 
 enum MESSAGE_CMD
@@ -34,14 +35,25 @@ private:
 
 public:
 	Message(MESSAGE_CMD cmd, id_t sender, id_t receiver) :
-	cmd(cmd), sender(sender), receiver(receiver) {};
+	cmd(cmd), sender(sender), receiver(receiver) { contentLength = 0; };
 
 	Message(MESSAGE_CMD cmd, id_t sender, id_t receiver, qsizetype contentLength, QString *content) :
 	cmd(cmd), sender(sender), receiver(receiver), contentLength(contentLength), content(content) {};
 
 	static QString *MessageHeaderToQString(struct Message &msg) {
-		return new QString(QString::number(msg.cmd) + QString::number(msg.sender) +
-				QString::number(msg.receiver) + QString::number(msg.contentLength));
+		return new QString("cmd=" + QString::number(msg.cmd) + "sender=" + QString::number(msg.sender) +
+					   "receiver=" + QString::number(msg.receiver) + "contentLength=" + QString::number(msg.contentLength));
+	}
+
+	static struct Message *QStringToMessageHeader(QString &msg) {
+		QRegularExpression re("cmd=\\d+sender=\\d+receiver=\\d+contentLength=\\d+$");
+		QRegularExpressionMatch match = re.match(msg);
+		if (re.captureCount() == 3) {
+			return new Message(static_cast<MESSAGE_CMD>(match.captured(1).toInt()),
+						       match.captured(2).toUInt(), match.captured(2).toUInt());
+		}
+
+		return nullptr;
 	}
 };
 

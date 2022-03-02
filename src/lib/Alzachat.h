@@ -9,5 +9,6 @@
 
 #include <QDebug>
 #include <QDateTime>
+#include "User.h"
 
 #endif //ALZACHAT_ALZACHAT_H

@@ -9,15 +9,17 @@
 #include "ServerConfig.h"
 #include "Logging.h"
 
+AlzaServer *server;
+
 int main(int argc, char *argv[])
 {
 	QCoreApplication app(argc, argv);
 	qInstallMessageHandler(alzaMessageHandler);
 
-	AlzaServer Server;
+	server = new AlzaServer();
 	readConfig(DEV_CONF_FILE);
 	validateConfig();
-	Server.startServer();
+	server->startServer();
 
 	return app.exec();
 }

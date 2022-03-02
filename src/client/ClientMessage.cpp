@@ -5,9 +5,14 @@
  */
 
 #include "AlzaRunnable.h"
+#include "AlzaClient.h"
 #include "ClientMessage.h"
 
-int ClientMessage::send() {
-	AlzaRunnable task();
-	return 0;
+int ClientMessage::sendHello(AlzaClient &client) {
+	Message msg(MESSAGE_CMD::HELLO, client.me->getId(), 0);
+	QString *msgStr = Message::MessageHeaderToQString(msg);
+	client.send(client.getSocket(), msgStr);
+	delete(msgStr);
+
+	qDebug() << "ajab!!!!";
 }

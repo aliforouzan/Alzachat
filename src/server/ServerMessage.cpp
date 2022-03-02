@@ -8,9 +8,11 @@
 #include "InternalMessage.h"
 #include "ServerMessage.h"
 
-int ServerMessage::sendHello(void *socketDescriptor) {
-	Message msg(MESSAGE_CMD::HELLO, 0, 0);
+int ServerMessage::sendHello(void *user) {
+	Message msg(MESSAGE_CMD::HELLO, 0, ((User *)user)->getId());
 	QString *msgStr = Message::MessageHeaderToQString(msg);
-	AlzaServer::send(static_cast<QTcpSocket *>(socketDescriptor), msgStr);
+	AlzaServer::send(server->getConnections().find(((User *)user)->getId()).value(), msgStr);
 	delete(msgStr);
+
+	qDebug() << "ajab!!!!";
 }

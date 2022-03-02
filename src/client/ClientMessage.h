@@ -12,7 +12,7 @@
 
 class ClientMessage:Message {
     public:
-	int send();
+	int sendHello(AlzaClient &client);
 };
 
 

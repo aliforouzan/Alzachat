@@ -23,6 +23,7 @@ private:
 	qint64 phoneNumber;
 	vector<User *> friends;
 public:
+	User(id_t id);
 	User(id_t id, QString &username, QString &password);
 	User(id_t id, QString &username, QString &password, QString &firstAndFamilyName);
 

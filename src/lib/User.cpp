@@ -18,6 +18,8 @@ User::User(id_t id, QString &username, QString &password, QString &firstAndFamil
 	id(id), username(username), password(password),
 	firstAndFamilyName(firstAndFamilyName) {}
 
+User::User(id_t id) : id(id){}
+
 id_t User::getId() const {
 	return id;
 }

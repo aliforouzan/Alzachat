@@ -12,7 +12,7 @@
 class ServerMessage:Message {
 
     public:
-	static int sendHello(void *data);
+	static int sendHello(void *user);
 };
 
 

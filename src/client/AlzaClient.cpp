@@ -4,13 +4,16 @@
  *                  Ali Forouzan
  */
 
+#include <QRandomGenerator>
 #include "AlzaClient.h"
+#include "ClientMessage.h"
 
 AlzaClient::AlzaClient(QObject *parent, const QString &host, qint16 port) : QObject(parent) {
 
 	this->host = host;
 	this->port = port;
 	connectionTimer.setInterval(1000);
+	me = new User(QRandomGenerator::global()->generate());
 
 	QThreadPool::globalInstance()->setMaxThreadCount(5);
 	socket = new QTcpSocket(parent);
@@ -25,6 +28,7 @@ AlzaClient::AlzaClient(QObject *parent, const QString &host, qint16 port) : QObj
 	QAbstractSocket::connect(socket, SIGNAL(stateChanged(QAbstractSocket::SocketState)),
 		this, SLOT(stateChanged(QAbstractSocket::SocketState)));
 	QAbstractSocket::connect(&connectionTimer, &QTimer::timeout, this, &AlzaClient::connect);
+	socket->setSocketOption(QAbstractSocket::KeepAliveOption, 1);
 
 	connect();
 }
@@ -33,7 +37,6 @@ void AlzaClient::connect() {
 	qDebug() << "Trying to connect to the server " + host + ":" + QString::number(port);
 	socket->connectToHost(host,port);
 }
-
 
 // asynchronous - runs separately from the thread we created
 void AlzaClient::connected() {
@@ -96,23 +99,43 @@ void AlzaClient::stateChanged(QAbstractSocket::SocketState socketState) {
 
 void AlzaClient::readyRead() {
 	qDebug() << "MyClient::readyRead()";
-	qDebug() << socket->readAll();
 
-	// Time consumer
-	AlzaRunnable *mytask = new AlzaRunnable(nullptr, nullptr);
-	mytask->setAutoDelete(true);
-	QAbstractSocket::connect(mytask, SIGNAL(Result(int)), this, SLOT(TaskResult(int)), Qt::QueuedConnection);
-
-	qDebug() << "Starting a new task using a thread from the QThreadPool";
-	QThreadPool::globalInstance()->start(mytask);
-
+	auto task = new AlzaRunnable(receive, static_cast<void *>(socket), this);
+	QThreadPool::globalInstance()->start(task);
 }
 
 // After a task performed a time consuming task.
 // We grab the result here, and send it to client
-void AlzaClient::TaskResult(int Number) {
-	QByteArray Buffer;
-	Buffer.append("\r\nTask result = %d", Number);
+void AlzaClient::result(int returnValue) {
+	qDebug() << "Task result = " << returnValue;
+}
 
-	socket->write(Buffer);
+int AlzaClient::receive(void *socket) {
+	/*QDataStream in((QTcpSocket *)socket);
+	QString msgString;
+
+	in.startTransaction();
+	QString str;
+	qint32 a;
+	in >> str >> a; // try to read packet atomically
+
+	if (!in.commitTransaction())
+		return 1;*/
+
+	byteArray = ((QTcpSocket *)socket)->readAll();
+
+	qDebug() << byteArray;
+
+}
+
+int AlzaClient::send(QTcpSocket *socket, QString *data) {
+	qDebug() << "trying to send new message:" << data;
+	socket->write(data->toUtf8());
+	socket->flush();
+	socket->waitForBytesWritten();
+	qDebug() << "message was successfully sent." << data;
+}
+
+QTcpSocket *AlzaClient::getSocket() const {
+	return socket;
 }
